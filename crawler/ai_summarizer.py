@@ -74,7 +74,7 @@ JSON 형식으로 응답하세요:
                 "content": prompt,
             }
         ],
-        model="llama3-70b-8192",
+        model="llama-3.3-70b-versatile",
         response_format={"type": "json_object"}
     )
     

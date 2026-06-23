@@ -1065,3 +1065,36 @@ ul { list-style: none; }
   opacity: 1;
   transform: translateX(-50%) scale(1);
 }
+
+/* ─── YouTube Planning Box (Premium Style) ─── */
+.youtube-plan-box {
+  background: rgba(239, 68, 68, 0.05); /* Soft YouTube red tint */
+  border-left: 3px solid #ef4444; /* YouTube red border */
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-top: 10px;
+}
+.youtube-plan-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.youtube-plan-item {
+  font-size: 11.5px;
+  line-height: 1.5;
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+}
+.youtube-plan-item:last-child {
+  margin-bottom: 0;
+}
+.youtube-plan-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-right: 4px;
+}

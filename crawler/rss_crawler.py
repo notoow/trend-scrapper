@@ -6,9 +6,12 @@ import time
 
 RSS_SOURCES = {
     "BBC Health": "http://feeds.bbci.co.uk/news/health/rss.xml",
-    "PubMed": "https://pubmed.ncbi.nlm.nih.gov/rss/search/1yQGjS7s7gN1m2tL-6T-2Q/?limit=50", # 임시 pubmed rss URL 예시
     "Reddit Urology": "https://www.reddit.com/r/urology/.rss",
-    "네이버 뉴스": "https://news.naver.com/rss/section/103" # 생활/문화 카테고리
+    "Reddit Sex": "https://www.reddit.com/r/sex/.rss",
+    "Reddit Sexual Health": "https://www.reddit.com/r/sexualhealth/.rss",
+    "Reddit Tinder": "https://www.reddit.com/r/tinder/.rss",
+    "Reddit STD": "https://www.reddit.com/r/STD/.rss",
+    "네이버 뉴스": "https://news.naver.com/rss/section/103"
 }
 
 def parse_date(date_str):

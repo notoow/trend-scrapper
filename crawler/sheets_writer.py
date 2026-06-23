@@ -52,12 +52,12 @@ def setup_worksheets(sheet):
     if not sheet:
         return
         
-    # 1. issues 시트 설정
+    # 1. issues 시트 설정 (컬럼 확대: 유튜브 콘텐츠 기획용 3대 자산 추가)
     try:
         issues_ws = sheet.worksheet("issues")
     except Exception:
-        issues_ws = sheet.add_worksheet(title="issues", rows="1000", cols="10")
-        issues_ws.append_row(["id", "date", "title", "source", "url", "category", "summary", "ai_reason", "content_score", "trend_score"])
+        issues_ws = sheet.add_worksheet(title="issues", rows="1000", cols="13")
+        issues_ws.append_row(["id", "date", "title", "source", "url", "category", "summary", "ai_reason", "content_score", "trend_score", "youtube_title", "thumbnail_text", "internal_title"])
         
     # 2. trends 시트 설정
     try:
@@ -101,11 +101,15 @@ def write_issues(sheet, issues):
             summary = ai_data.get("summary", "")
             ai_reason = ai_data.get("ai_reason", "")
             score = ai_data.get("content_score", 50)
-            
             trend_score = issue.get("trend_score", 0)
             
+            # 유튜브 콘텐츠 기획용 컬럼 추출
+            yt_title = ai_data.get("youtube_title", "")
+            tb_text = ai_data.get("thumbnail_text", "")
+            int_title = ai_data.get("internal_title", "")
+            
             rows_to_add.append([
-                issue_id, date_str, title, source, url, category, summary, ai_reason, score, trend_score
+                issue_id, date_str, title, source, url, category, summary, ai_reason, score, trend_score, yt_title, tb_text, int_title
             ])
             
         if rows_to_add:

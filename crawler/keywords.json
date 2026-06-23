@@ -58,5 +58,47 @@
     "english": "penile enlargement",
     "category": "확대수술",
     "active": true
+  },
+  {
+    "korean": "호날두",
+    "english": "Ronaldo",
+    "category": "음경 보톡스",
+    "active": true
+  },
+  {
+    "korean": "브래들리 쿠퍼",
+    "english": "Bradley Cooper",
+    "category": "여유증",
+    "active": true
+  },
+  {
+    "korean": "요로결석",
+    "english": "kidney stone",
+    "category": "일반",
+    "active": true
+  },
+  {
+    "korean": "메시",
+    "english": "Messi",
+    "category": "일반",
+    "active": true
+  },
+  {
+    "korean": "성 건강",
+    "english": "sexual health",
+    "category": "성 건강",
+    "active": true
+  },
+  {
+    "korean": "틴더",
+    "english": "tinder",
+    "category": "성 건강",
+    "active": true
+  },
+  {
+    "korean": "섹스",
+    "english": "sex",
+    "category": "성 건강",
+    "active": true
   }
 ]

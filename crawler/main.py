@@ -46,8 +46,9 @@ def main():
     trends_data = fetch_trends(keywords_config)
     print(f"[Main] Google Trends 수집 완료 (키워드 {len(trends_data)}개)")
     
-    # 4. RSS 크롤러 실행
-    filtered_issues = crawl_all(keywords_config)
+    # 4. RSS 및 API 크롤러 실행
+    newsapi_key = os.getenv("NEWSAPI_KEY")
+    filtered_issues = crawl_all(keywords_config, newsapi_key=newsapi_key)
     print(f"[Main] 키워드 필터링 통과 이슈: {len(filtered_issues)}건")
     
     # 5. AI 요약 수행 및 트렌드 점수 맵핑

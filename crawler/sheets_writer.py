@@ -42,7 +42,9 @@ def connect_sheets(sheets_id, service_account_json_base64):
         print(f"[Google Sheets] 성공적으로 스프레드시트에 연결되었습니다: {sheet.title}")
         return sheet
     except Exception as e:
-        print(f"[Google Sheets] 스프레드시트 연결 실패: {e}")
+        import traceback
+        print(f"[Google Sheets] 스프레드시트 연결 실패 상세 에러:")
+        traceback.print_exc()
         return None
 
 def setup_worksheets(sheet):

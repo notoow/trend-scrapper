@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>하이스트 비뇨의학과 - Issue Tracker</title>
+  <!-- Tabler Icons (Sleek vector icons) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sidebar Mobile Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="wrap">
+    <!-- Top Navigation Bar -->
+    <header class="topbar">
+      <div class="brand">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="메뉴 열기">
+          <i class="ti ti-menu-2"></i>
+        </button>
+        <div class="brand-icon"><span>H</span></div>
+        <span class="brand-name">하이스트 비뇨의학과</span>
+        <span class="brand-sep">/</span>
+        <span class="brand-sub">Issue Tracker</span>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-status">
+          <span class="live-dot"></span>
+          <span id="syncStatus">실시간 수집 중</span>
+        </div>
+        <div class="topbar-status" id="lastUpdated">마지막 업데이트: 방금 전</div>
+        <button class="theme-toggle" id="themeToggle" data-tooltip="테마 전환" aria-label="테마 전환">
+          <i class="ti ti-sun" id="themeIcon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero / Stats Dashboard Section -->
+    <section class="hero">
+      <div class="hero-label">Daily Intelligence Report</div>
+      <h1 class="hero-title">오늘의 비뇨의학 <em>트렌드 이슈</em></h1>
+      <div class="hero-sub" id="heroSubDate">2026년 6월 23일 화요일 — 글로벌 12개 소스 자동 수집 · AI 분석</div>
+      
+      <div class="kpi-row">
+        <div class="kpi" data-tooltip="오늘 수집된 전체 이슈 개수">
+          <div class="kpi-label">수집 이슈</div>
+          <div class="kpi-val" id="kpiTotal">142</div>
+          <span class="kpi-badge up" id="kpiTotalSub">+23 오늘</span>
+        </div>
+        <div class="kpi" data-tooltip="PubMed / arXiv 등 학술 저널 소스">
+          <div class="kpi-label">학술 논문</div>
+          <div class="kpi-val" id="kpiAcademic">38</div>
+          <span class="kpi-badge up" id="kpiAcademicSub">PubMed · arXiv</span>
+        </div>
+        <div class="kpi" data-tooltip="콘텐츠 파급력이 높은 핵심 이슈 개수">
+          <div class="kpi-label">AI 핫이슈 선정</div>
+          <div class="kpi-val" id="kpiHot">5</div>
+          <span class="kpi-badge up" id="kpiHotSub">콘텐츠화 추천</span>
+        </div>
+        <div class="kpi" data-tooltip="팀에서 마케팅 소재로 선점한 개수">
+          <div class="kpi-label">북마크 소재</div>
+          <div class="kpi-val" id="kpiBookmarks">34</div>
+          <span class="kpi-badge neu" id="kpiBookmarksSub">팀 저장됨</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Pick Hot Issues Section -->
+    <section class="hot-section">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="ti ti-flame" style="color:var(--color-danger);font-size:16px;"></i>
+          AI 선정 핫이슈
+          <span class="ai-badge">AI PICK</span>
+        </div>
+        <div class="see-all" id="seeAllHot">전체 보기 <i class="ti ti-chevron-right" style="font-size:12px;"></i></div>
+      </div>
+
+      <div class="hot-grid" id="hotIssuesGrid">
+        <!-- Skeleton placeholders -->
+        <div class="hot-main skeleton" style="height: 220px;"></div>
+        <div class="hot-sub skeleton" style="height: 220px;"></div>
+        <div class="hot-sub skeleton" style="height: 220px;"></div>
+      </div>
+    </section>
+
+    <!-- Live Keyword Trends Bar -->
+    <div class="trend-bar" id="trendKeywordsBar">
+      <span class="trend-label">급상승</span>
+      <span class="trend-item t1">팽창형 보형물 +340%</span>
+      <span class="trend-sep">·</span>
+      <span class="trend-item t2">여유증 +218%</span>
+      <span class="trend-sep">·</span>
+      <span class="trend-item t3">ED 신약 +187%</span>
+      <span class="trend-sep">·</span>
+      <span class="trend-item t4">전립선암 스크리닝 +92%</span>
+      <span class="trend-sep">·</span>
+      <span class="trend-item t5">정관 복원 +64%</span>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="main-layout">
+      <!-- Left Sidebar Navigation -->
+      <aside class="sidebar" id="sidebar">
+        <div class="nav-group-label">카테고리</div>
+        <nav id="categoryNav">
+          <div class="nav-item active" data-category="all"><i class="ti ti-layout-grid"></i>전체 이슈<span class="nav-count" id="countAll">0</span></div>
+          <div class="nav-item" data-category="hot"><i class="ti ti-flame" style="color:var(--color-danger);"></i>AI 핫이슈<span class="nav-count" id="countHot">0</span></div>
+          <div class="nav-item" data-category="academic"><i class="ti ti-microscope"></i>학술 논문<span class="nav-count" id="countAcademic">0</span></div>
+          <div class="nav-item" data-category="확대수술"><i class="ti ti-plus"></i>확대수술<span class="nav-count">0</span></div>
+          <div class="nav-item" data-category="발기부전"><i class="ti ti-heart-rate-monitor"></i>발기부전<span class="nav-count">0</span></div>
+          <div class="nav-item" data-category="보형물 수술"><i class="ti ti-device-medical"></i>보형물 수술<span class="nav-count">0</span></div>
+          <div class="nav-item" data-category="여유증"><i class="ti ti-user"></i>여유증<span class="nav-count">0</span></div>
+          <div class="nav-item" data-category="음경 보톡스"><i class="ti ti-needle"></i>음경 보톡스<span class="nav-count">0</span></div>
+          <div class="nav-item" data-category="정관수술"><i class="ti ti-cut"></i>정관수술<span class="nav-count">0</span></div>
+          <div class="nav-item" data-category="전립선"><i class="ti ti-stethoscope"></i>전립선<span class="nav-count">0</span></div>
+          <div class="nav-item" data-category="조루"><i class="ti ti-activity"></i>조루<span class="nav-count">0</span></div>
+        </nav>
+
+        <div class="nav-group-label">소스</div>
+        <nav id="sourceNav">
+          <div class="nav-item" data-source="BBC Health"><span class="source-dot d-bbc"></span>BBC Health</div>
+          <div class="nav-item" data-source="PubMed"><span class="source-dot d-pub"></span>PubMed</div>
+          <div class="nav-item" data-source="Reddit Urology"><span class="source-dot d-red"></span>Reddit r/urology</div>
+          <div class="nav-item" data-source="네이버 뉴스"><span class="source-dot d-nav"></span>네이버 뉴스</div>
+        </nav>
+      </aside>
+
+      <!-- Right Main Feed Area -->
+      <main class="content">
+        <div class="content-header">
+          <h2 class="content-title" id="contentTitle">전체 이슈 <span class="count" id="listCount">0건</span></h2>
+          
+          <div class="content-controls">
+            <!-- Search Box -->
+            <div class="search-box">
+              <i class="ti ti-search"></i>
+              <input type="text" id="searchInput" placeholder="제목, 요약, 키워드 검색...">
+            </div>
+
+            <!-- Sort Dropdown -->
+            <select class="sort-select" id="sortSelect">
+              <option value="score">AI 추천순</option>
+              <option value="trend">구글 트렌드순</option>
+              <option value="latest">최신 등록순</option>
+            </select>
+
+            <!-- Mode Selector (Demo vs Live) -->
+            <div class="filter-row">
+              <button class="chip active" id="btnModeDemo">시뮬레이션</button>
+              <button class="chip" id="btnModeLive">구글 시트 연동</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Issue Feed Cards -->
+        <div class="cards" id="issuesList">
+          <!-- Skeletons -->
+          <div class="card skeleton" style="height: 120px;"></div>
+          <div class="card skeleton" style="height: 120px;"></div>
+          <div class="card skeleton" style="height: 120px;"></div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-wrap">
+          <button class="load-more-btn" id="loadMoreBtn">이슈 더 보기</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+[
+  {
+    "korean": "팽창형 보형물",
+    "english": "inflatable penile prosthesis",
+    "category": "보형물 수술",
+    "active": true
+  },
+  {
+    "korean": "굴곡형 보형물",
+    "english": "malleable penile prosthesis",
+    "category": "보형물 수술",
+    "active": true
+  },
+  {
+    "korean": "발기부전",
+    "english": "erectile dysfunction",
+    "category": "발기부전",
+    "active": true
+  },
+  {
+    "korean": "여유증",
+    "english": "gynecomastia",
+    "category": "여유증",
+    "active": true
+  },
+  {
+    "korean": "음경 보톡스",
+    "english": "penile botox",
+    "category": "음경 보톡스",
+    "active": true
+  },
+  {
+    "korean": "정관수술",
+    "english": "vasectomy",
+    "category": "정관수술",
+    "active": true
+  },
+  {
+    "korean": "전립선암",
+    "english": "prostate cancer",
+    "category": "전립선",
+    "active": true
+  },
+  {
+    "korean": "전립선 비대증",
+    "english": "benign prostatic hyperplasia",
+    "category": "전립선",
+    "active": true
+  },
+  {
+    "korean": "조루",
+    "english": "premature ejaculation",
+    "category": "조루",
+    "active": true
+  },
+  {
+    "korean": "확대수술",
+    "english": "penile enlargement",
+    "category": "확대수술",
+    "active": true
+  }
+]

@@ -1,0 +1,389 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  .wrap{font-family:'Inter',sans-serif;background:var(--color-background-tertiary);}
+
+  .topbar{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:0 24px;height:50px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-icon{width:26px;height:26px;background:#0f1f3d;border-radius:5px;display:flex;align-items:center;justify-content:center;}
+  .brand-icon span{color:#fff;font-size:11px;font-weight:500;}
+  .brand-name{font-size:13px;font-weight:500;color:var(--color-text-primary);}
+  .brand-sep{color:var(--color-border-primary);margin:0 4px;}
+  .brand-sub{font-size:13px;color:var(--color-text-secondary);}
+  .topbar-right{display:flex;align-items:center;gap:14px;}
+  .live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;display:inline-block;margin-right:5px;}
+  .topbar-right span{font-size:12px;color:var(--color-text-tertiary);}
+
+  /* HERO */
+  .hero{background:#0f1f3d;padding:28px 24px 24px;position:relative;overflow:hidden;}
+  .hero-label{font-size:10px;font-weight:500;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:8px;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:#fff;line-height:1.3;margin-bottom:4px;}
+  .hero-title em{color:#a8c4e8;font-style:normal;}
+  .hero-sub{font-size:11.5px;color:rgba(255,255,255,0.35);margin-bottom:22px;}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .kpi{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.09);border-radius:9px;padding:13px 14px;}
+  .kpi-label{font-size:9.5px;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+  .kpi-val{font-size:22px;font-weight:300;color:#fff;line-height:1;}
+  .kpi-badge{display:inline-block;margin-top:5px;font-size:9.5px;padding:2px 7px;border-radius:20px;}
+  .up{background:rgba(34,197,94,0.15);color:#4ade80;}
+  .neu{background:rgba(148,163,184,0.12);color:#94a3b8;}
+
+  /* HOT ISSUES */
+  .hot-section{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:18px 24px;}
+  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .section-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--color-text-primary);letter-spacing:0.3px;}
+  .ai-badge{font-size:9.5px;font-weight:500;letter-spacing:1px;padding:2px 8px;border-radius:20px;background:rgba(124,58,237,0.1);color:#7c3aed;border:0.5px solid rgba(124,58,237,0.2);}
+  .see-all{font-size:11px;color:var(--color-text-tertiary);cursor:pointer;display:flex;align-items:center;gap:3px;}
+
+  .hot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;}
+
+  /* 메인 핫이슈 카드 */
+  .hot-main{background:linear-gradient(135deg,#0f1f3d 0%,#1a3a6e 100%);border-radius:10px;padding:18px;position:relative;overflow:hidden;cursor:pointer;}
+  .hot-main::before{content:'';position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);}
+  .hot-rank{font-size:9.5px;font-weight:500;letter-spacing:1.5px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+  .rank-num{background:rgba(239,68,68,0.25);color:#fca5a5;padding:1px 7px;border-radius:20px;font-size:9px;}
+  .hot-main-tag{display:inline-block;font-size:9.5px;padding:2px 8px;border-radius:4px;background:rgba(168,196,232,0.15);color:#a8c4e8;margin-bottom:8px;}
+  .hot-main-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:#fff;line-height:1.4;margin-bottom:8px;}
+  .hot-main-summary{font-size:11.5px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:12px;}
+  .hot-main-footer{display:flex;align-items:center;justify-content:space-between;}
+  .hot-main-meta{font-size:10.5px;color:rgba(255,255,255,0.35);}
+  .content-score{display:flex;align-items:center;gap:5px;}
+  .score-label{font-size:9.5px;color:rgba(255,255,255,0.35);}
+  .score-bar-wrap{width:60px;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;}
+  .score-bar{height:3px;border-radius:2px;background:#a8c4e8;}
+  .score-pct{font-size:10px;color:#a8c4e8;font-weight:500;}
+
+  /* 서브 핫이슈 카드 */
+  .hot-sub{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:14px;cursor:pointer;display:flex;flex-direction:column;gap:6px;}
+  .hot-sub-rank{display:flex;align-items:center;gap:6px;}
+  .rank-badge{font-size:9px;font-weight:500;padding:1px 6px;border-radius:20px;}
+  .r2{background:rgba(234,88,12,0.12);color:#ea580c;}
+  .r3{background:rgba(202,138,4,0.12);color:#ca8a04;}
+  .hot-sub-source{font-size:9.5px;color:var(--color-text-tertiary);}
+  .hot-sub-tag{font-size:9.5px;padding:1px 7px;border-radius:3px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);display:inline-block;margin-bottom:2px;}
+  .hot-sub-title{font-size:12px;font-weight:500;color:var(--color-text-primary);line-height:1.45;}
+  .hot-sub-reason{font-size:11px;color:var(--color-text-secondary);line-height:1.55;}
+  .ai-reason-label{font-size:9.5px;font-weight:500;color:#7c3aed;display:flex;align-items:center;gap:3px;margin-top:4px;}
+  .hot-sub-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px;border-top:0.5px solid var(--color-border-tertiary);}
+  .sub-score{font-size:11px;font-weight:500;}
+  .s-high{color:#dc2626;}
+  .s-mid{color:#ea580c;}
+  .hot-sub-time{font-size:10px;color:var(--color-text-tertiary);}
+
+  /* AI 이유 팝업 느낌의 인라인 박스 */
+  .ai-reason-box{background:rgba(124,58,237,0.06);border:0.5px solid rgba(124,58,237,0.18);border-radius:6px;padding:7px 10px;margin-top:6px;}
+  .ai-reason-box p{font-size:11px;color:var(--color-text-secondary);line-height:1.55;}
+
+  /* TRENDING BAR */
+  .trend-bar{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:10px 24px;display:flex;align-items:center;gap:8px;overflow:hidden;}
+  .trend-label{font-size:9.5px;font-weight:500;letter-spacing:1.5px;color:var(--color-text-tertiary);text-transform:uppercase;white-space:nowrap;margin-right:4px;}
+  .trend-item{font-size:11px;padding:3px 10px;border-radius:20px;white-space:nowrap;cursor:pointer;}
+  .t1{background:rgba(220,38,38,0.08);color:#dc2626;}
+  .t2{background:rgba(234,88,12,0.08);color:#ea580c;}
+  .t3{background:rgba(202,138,4,0.08);color:#ca8a04;}
+  .t4{background:rgba(22,163,74,0.08);color:#16a34a;}
+  .t5{background:rgba(37,99,235,0.08);color:#2563eb;}
+  .tsep{color:var(--color-border-secondary);font-size:12px;}
+
+  /* MAIN LAYOUT */
+  .main{display:grid;grid-template-columns:192px 1fr;min-height:420px;}
+  .sidebar{background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);padding:18px 0;}
+  .nav-group-label{font-size:9.5px;letter-spacing:1.5px;color:var(--color-text-tertiary);text-transform:uppercase;padding:0 16px;margin-bottom:6px;margin-top:14px;}
+  .nav-group-label:first-child{margin-top:0;}
+  .nav-item{display:flex;align-items:center;gap:7px;padding:6px 16px;font-size:12px;color:var(--color-text-secondary);cursor:pointer;border-left:2px solid transparent;}
+  .nav-item.active{color:#1a4f8a;background:rgba(26,79,138,0.06);border-left-color:#1a4f8a;font-weight:500;}
+  .nav-item i{font-size:13px;}
+  .nav-count{margin-left:auto;font-size:9.5px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:1px 6px;color:var(--color-text-tertiary);}
+  .source-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+  .d-bbc{background:#f59e0b;}
+  .d-pub{background:#3b82f6;}
+  .d-nav{background:#22c55e;}
+  .d-arx{background:#8b5cf6;}
+  .d-red{background:#f97316;}
+
+  /* CONTENT */
+  .content{background:var(--color-background-tertiary);padding:18px;}
+  .content-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .content-title{font-size:13px;font-weight:500;color:var(--color-text-primary);}
+  .filter-row{display:flex;gap:5px;}
+  .chip{font-size:11px;padding:4px 11px;border-radius:20px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;}
+  .chip.active{background:#1a4f8a;color:#fff;border-color:#1a4f8a;}
+
+  .cards{display:flex;flex-direction:column;gap:9px;}
+  .card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;}
+  .card-meta{display:flex;align-items:center;gap:5px;margin-bottom:5px;flex-wrap:wrap;}
+  .src-badge{font-size:9.5px;font-weight:500;letter-spacing:0.4px;padding:2px 7px;border-radius:4px;}
+  .s-bbc{background:#fef3c7;color:#92400e;}
+  .s-pub{background:#dbeafe;color:#1e40af;}
+  .s-nav{background:#dcfce7;color:#166534;}
+  .s-arx{background:#ede9fe;color:#5b21b6;}
+  .s-red{background:#fff7ed;color:#9a3412;}
+  .cat-tag{font-size:9.5px;color:var(--color-text-tertiary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);padding:2px 7px;border-radius:4px;}
+  .academic-tag{font-size:9.5px;padding:2px 7px;border-radius:4px;background:rgba(124,58,237,0.08);color:#7c3aed;border:0.5px solid rgba(124,58,237,0.2);}
+  .card-title{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1.45;margin-bottom:5px;}
+  .card-summary{font-size:11.5px;color:var(--color-text-secondary);line-height:1.6;}
+  .card-footer{display:flex;align-items:center;gap:8px;margin-top:9px;}
+  .card-time{font-size:10.5px;color:var(--color-text-tertiary);}
+  .trend-chip{font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:500;}
+  .tc-high{background:rgba(220,38,38,0.08);color:#dc2626;}
+  .tc-mid{background:rgba(234,88,12,0.08);color:#ea580c;}
+  .tc-low{background:rgba(22,163,74,0.08);color:#16a34a;}
+  .card-actions{display:flex;flex-direction:column;align-items:flex-end;gap:7px;}
+  .score-ring{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--color-border-secondary);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring.hot{border-color:#dc2626;}
+  .score-n{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1;}
+  .score-n.hot{color:#dc2626;}
+  .score-l{font-size:7.5px;color:var(--color-text-tertiary);letter-spacing:0.5px;}
+  .bm-btn{font-size:16px;color:var(--color-text-tertiary);cursor:pointer;}
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-icon"><span>H</span></div>
+      <span class="brand-name">하이스트 비뇨의학과</span>
+      <span class="brand-sep">/</span>
+      <span class="brand-sub">Issue Tracker</span>
+    </div>
+    <div class="topbar-right">
+      <span><span class="live-dot"></span>실시간 수집 중</span>
+      <span>마지막 업데이트 2분 전</span>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">Daily Intelligence Report</div>
+    <div class="hero-title">오늘의 비뇨의학 <em>트렌드 이슈</em></div>
+    <div class="hero-sub">2026년 6월 23일 화요일 — 글로벌 12개 소스 자동 수집 · AI 분석</div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-label">수집 이슈</div>
+        <div class="kpi-val">142</div>
+        <span class="kpi-badge up">+23 오늘</span>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">학술 논문</div>
+        <div class="kpi-val">38</div>
+        <span class="kpi-badge up">PubMed · arXiv</span>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">AI 핫이슈 선정</div>
+        <div class="kpi-val">5</div>
+        <span class="kpi-badge up">콘텐츠화 추천</span>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">북마크 소재</div>
+        <div class="kpi-val">34</div>
+        <span class="kpi-badge neu">팀 저장됨</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOT ISSUES -->
+  <div class="hot-section">
+    <div class="section-header">
+      <div class="section-title">
+        <i class="ti ti-flame" style="color:#ef4444;font-size:15px;" aria-hidden="true"></i>
+        AI 선정 핫이슈
+        <span class="ai-badge">AI PICK</span>
+      </div>
+      <div class="see-all">전체 보기 <i class="ti ti-chevron-right" style="font-size:12px;"></i></div>
+    </div>
+
+    <div class="hot-grid">
+      <!-- 메인 핫이슈 -->
+      <div class="hot-main">
+        <div class="hot-rank">
+          <span class="rank-num">#1 핫이슈</span>
+          <span style="color:rgba(255,255,255,0.25);font-size:9px;">· PubMed · 3시간 전</span>
+        </div>
+        <span class="hot-main-tag">학술 논문 · 발기부전</span>
+        <div class="hot-main-title">음경 보형물 삽입 후 삶의 질 변화 — 아시아 남성 1,200명 추적 연구</div>
+        <div class="hot-main-summary">팽창형 보형물 수술 후 12개월 추적 조사에서 환자 만족도 92%, 파트너 만족도 87%를 기록. 한국·일본 데이터 포함, 국내 임상 근거로 직접 활용 가능한 고품질 자료.</div>
+        <div class="hot-main-footer">
+          <div class="hot-main-meta">콘텐츠화 점수</div>
+          <div class="content-score">
+            <div class="score-bar-wrap"><div class="score-bar" style="width:96%;"></div></div>
+            <span class="score-pct">96점</span>
+          </div>
+        </div>
+        <div class="ai-reason-box" style="margin-top:10px;">
+          <div class="ai-reason-label"><i class="ti ti-robot" style="font-size:11px;"></i> AI 선정 이유</div>
+          <p>아시아 데이터 포함 대규모 RCT, 수치 인용 가능, 국내 환자 공감도 높음. 카드뉴스·블로그·유튜브 스크립트 3종 모두 적합.</p>
+        </div>
+      </div>
+
+      <!-- 서브 핫이슈 2 -->
+      <div class="hot-sub">
+        <div class="hot-sub-rank">
+          <span class="rank-badge r2">#2</span>
+          <span class="hot-sub-source">BBC Health · 5시간 전</span>
+        </div>
+        <span class="hot-sub-tag">여유증 · 글로벌 트렌드</span>
+        <div class="hot-sub-title">SNS 노출 문화로 20대 남성 여유증 수술 47% 급증</div>
+        <div class="hot-sub-reason">인스타·틱톡 체형 노출 트렌드가 남성 외형 콤플렉스를 자극. 영국·한국 동시 보도로 글로벌 공감대 형성.</div>
+        <div class="ai-reason-box">
+          <div class="ai-reason-label"><i class="ti ti-robot" style="font-size:11px;"></i> AI 선정 이유</div>
+          <p>MZ 타깃 공감 소재. 수술 전후 비교 콘텐츠, 원인 분석 카드뉴스로 즉시 활용 가능.</p>
+        </div>
+        <div class="hot-sub-footer">
+          <span class="sub-score s-high">콘텐츠화 89점</span>
+          <span class="hot-sub-time">트렌드 +218%</span>
+        </div>
+      </div>
+
+      <!-- 서브 핫이슈 3 -->
+      <div class="hot-sub">
+        <div class="hot-sub-rank">
+          <span class="rank-badge r3">#3</span>
+          <span class="hot-sub-source">arXiv · 어제</span>
+        </div>
+        <span class="hot-sub-tag">학술 논문 · ED 신약</span>
+        <div class="hot-sub-title">신규 PDE5 억제제, 난치성 ED 환자 89% 효과 — 3상 임상 결과</div>
+        <div class="hot-sub-reason">기존 비아그라 계열에 무반응인 환자군에서 압도적 효과. 2027년 FDA 승인 예정으로 시장 파급력 클 전망.</div>
+        <div class="ai-reason-box">
+          <div class="ai-reason-label"><i class="ti ti-robot" style="font-size:11px;"></i> AI 선정 이유</div>
+          <p>학술 → 대중 번역 적합. "비아그라의 진화" 같은 훅으로 유튜브·블로그 고관여 콘텐츠 가능.</p>
+        </div>
+        <div class="hot-sub-footer">
+          <span class="sub-score s-mid">콘텐츠화 83점</span>
+          <span class="hot-sub-time">트렌드 +187%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRENDING BAR -->
+  <div class="trend-bar">
+    <span class="trend-label">급상승</span>
+    <span class="trend-item t1">팽창형 보형물 +340%</span>
+    <span class="tsep">·</span>
+    <span class="trend-item t2">여유증 +218%</span>
+    <span class="tsep">·</span>
+    <span class="trend-item t3">ED 신약 +187%</span>
+    <span class="tsep">·</span>
+    <span class="trend-item t4">전립선암 스크리닝 +92%</span>
+    <span class="tsep">·</span>
+    <span class="trend-item t5">정관 복원 +64%</span>
+  </div>
+
+  <div class="main">
+    <div class="sidebar">
+      <div class="nav-group-label">카테고리</div>
+      <div class="nav-item active"><i class="ti ti-layout-grid"></i>전체 이슈<span class="nav-count">142</span></div>
+      <div class="nav-item"><i class="ti ti-flame" style="color:#ef4444;"></i>AI 핫이슈<span class="nav-count">5</span></div>
+      <div class="nav-item"><i class="ti ti-microscope"></i>학술 논문<span class="nav-count">38</span></div>
+      <div class="nav-item"><i class="ti ti-plus"></i>확대수술<span class="nav-count">28</span></div>
+      <div class="nav-item"><i class="ti ti-heart-rate-monitor"></i>발기부전<span class="nav-count">31</span></div>
+      <div class="nav-item"><i class="ti ti-device-medical"></i>팽창형 보형물<span class="nav-count">19</span></div>
+      <div class="nav-item"><i class="ti ti-activity"></i>굴곡형 보형물<span class="nav-count">12</span></div>
+      <div class="nav-item"><i class="ti ti-user"></i>여유증<span class="nav-count">24</span></div>
+      <div class="nav-item"><i class="ti ti-needle"></i>음경 보톡스<span class="nav-count">9</span></div>
+      <div class="nav-item"><i class="ti ti-cut"></i>정관수술<span class="nav-count">11</span></div>
+      <div class="nav-item"><i class="ti ti-stethoscope"></i>전립선<span class="nav-count">8</span></div>
+
+      <div class="nav-group-label">소스</div>
+      <div class="nav-item"><span class="source-dot d-bbc"></span>BBC Health</div>
+      <div class="nav-item"><span class="source-dot d-pub"></span>PubMed</div>
+      <div class="nav-item"><span class="source-dot d-arx"></span>arXiv</div>
+      <div class="nav-item"><span class="source-dot d-nav"></span>네이버 뉴스</div>
+      <div class="nav-item"><span class="source-dot d-red"></span>Reddit r/urology</div>
+    </div>
+
+    <div class="content">
+      <div class="content-header">
+        <span class="content-title">전체 이슈 <span style="color:var(--color-text-tertiary);font-weight:400;">142건</span></span>
+        <div class="filter-row">
+          <span class="chip active">전체</span>
+          <span class="chip">오늘</span>
+          <span class="chip">학술</span>
+          <span class="chip">급상승</span>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div>
+            <div class="card-meta">
+              <span class="src-badge s-pub">PubMed</span>
+              <span class="academic-tag">학술 논문</span>
+              <span class="cat-tag">팽창형 보형물</span>
+            </div>
+            <div class="card-title">음경 보형물 삽입 후 삶의 질 변화 — 아시아 남성 1,200명 추적 연구</div>
+            <div class="card-summary">12개월 추적에서 환자 만족도 92%, 파트너 만족도 87% 기록. 한국·일본 데이터 포함. 국내 임상 근거로 직접 활용 가능한 고품질 RCT 자료로 콘텐츠화 적합도 최상.</div>
+            <div class="card-footer">
+              <span class="card-time">3시간 전</span>
+              <span class="trend-chip tc-high">급상승 +340%</span>
+              <span class="trend-chip" style="background:rgba(124,58,237,0.08);color:#7c3aed;">AI 핫이슈 #1</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <div class="score-ring hot"><span class="score-n hot">96</span><span class="score-l">SCORE</span></div>
+            <i class="ti ti-bookmark bm-btn" aria-label="북마크"></i>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-meta">
+              <span class="src-badge s-arx">arXiv</span>
+              <span class="academic-tag">학술 논문</span>
+              <span class="cat-tag">발기부전</span>
+            </div>
+            <div class="card-title">신규 PDE5 억제제, 난치성 ED 환자군 89% 효과 입증 — 3상 임상 결과 공개</div>
+            <div class="card-summary">기존 약물 무반응 환자를 대상으로 한 대규모 3상 임상에서 신규 계열 PDE5 억제제의 압도적 효과 확인. 2027년 FDA 승인 신청 예정으로 시장 패러다임 변화 전망.</div>
+            <div class="card-footer">
+              <span class="card-time">어제</span>
+              <span class="trend-chip tc-mid">급상승 +187%</span>
+              <span class="trend-chip" style="background:rgba(124,58,237,0.08);color:#7c3aed;">AI 핫이슈 #3</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <div class="score-ring hot"><span class="score-n hot">83</span><span class="score-l">SCORE</span></div>
+            <i class="ti ti-bookmark bm-btn" aria-label="북마크"></i>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-meta">
+              <span class="src-badge s-bbc">BBC Health</span>
+              <span class="cat-tag">여유증</span>
+            </div>
+            <div class="card-title">SNS 노출 문화로 20대 남성 여유증 수술 유럽·아시아 동시 급증</div>
+            <div class="card-summary">인스타그램·틱톡의 체형 노출 트렌드가 남성 외형 콤플렉스를 자극, 영국과 한국에서 동시 보도. MZ 세대 타깃 공감 콘텐츠 소재로 카드뉴스·유튜브 스크립트에 즉시 활용 가능.</div>
+            <div class="card-footer">
+              <span class="card-time">5시간 전</span>
+              <span class="trend-chip tc-mid">급상승 +218%</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <div class="score-ring"><span class="score-n">89</span><span class="score-l">SCORE</span></div>
+            <i class="ti ti-bookmark bm-btn" aria-label="북마크"></i>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-meta">
+              <span class="src-badge s-pub">PubMed</span>
+              <span class="academic-tag">학술 논문</span>
+              <span class="cat-tag">전립선</span>
+            </div>
+            <div class="card-title">전립선암 조기 스크리닝 PSA 기준치 재설정 — 미국비뇨기과학회 가이드라인 개정</div>
+            <div class="card-summary">AUA가 PSA 기준치를 연령별로 세분화한 새 가이드라인 발표. 40대 이상 남성 조기 검진 권고 강화로 국내 비뇨의학과 검진 패턴 변화 예상.</div>
+            <div class="card-footer">
+              <span class="card-time">오늘 오전 8:30</span>
+              <span class="trend-chip tc-low">급상승 +92%</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <div class="score-ring"><span class="score-n">77</span><span class="score-l">SCORE</span></div>
+            <i class="ti ti-bookmark bm-btn" aria-label="북마크"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

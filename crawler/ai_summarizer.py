@@ -154,7 +154,7 @@ def clean_leaks(text):
     return text
 
 def summarize(title, text, gemini_key=None, groq_key=None):
-    """Gemini API를 메인으로 요약을 수행하고, 실패 시 Groq로 폴백. 둘 다 없으면 더미 데이터 반환."""
+    """Gemini API를 메인으로 요약을 수행하고, 실패 시 Groq로 폴백. 둘 다 없거나 실패하면 실패 상태를 반환."""
     combined_text = f"제목: {title}\n본문 요약: {text}"
     result = None
     
@@ -174,10 +174,17 @@ def summarize(title, text, gemini_key=None, groq_key=None):
         except Exception as e:
             print(f"[AI 요약] Groq 실패: {e}")
             
-    # 3. 전체 실패 시 기본 더미 반환
+    # 3. 전체 실패 시 기본 에러 표시 구조 반환
     if not result:
-        print("[AI 요약] API 키 누락 또는 호출 에러로 인해 로컬 더미 요약을 제공합니다.")
-        result = generate_dummy_summary(title)
+        print("[AI 요약] API 키 누락 또는 호출 에러로 요약에 실패했습니다.")
+        result = {
+            "summary": "AI 요약 실패 (API 키 또는 할당량 초과)",
+            "content_score": 0,
+            "ai_reason": "AI API 분석 불가",
+            "youtube_title": "",
+            "thumbnail_text": "",
+            "internal_title": ""
+        }
         
     # 출력 한글 정제 필터 적용 (일어/한자 제거)
     if result:
@@ -193,20 +200,3 @@ def summarize(title, text, gemini_key=None, groq_key=None):
             result["internal_title"] = clean_leaks(result["internal_title"])
             
     return result
-
-def generate_dummy_summary(title):
-    """임시 요약 정보 생성"""
-    scores = [78, 83, 89, 92, 96]
-    reasons = [
-        "아시아 데이터 포함 대규모 연구로 국내 공감도가 높고 스크립트 작성에 적합합니다.",
-        "여유증 등 대중적인 MZ세대 남성 콤플렉스를 자극하여 SNS 카드뉴스 소재로 제격입니다.",
-        "기존 비아그라 계열 대체 신약으로 환자 고관여 기사 발행 시 노출 확률이 높습니다."
-    ]
-    return {
-        "summary": f"'{title}' 에 대한 의학적 정보 분석 자료입니다. 수술 전후 비교 및 최신 가이드라인이 명시되어 있어 국내 환자 맞춤형 정보로 재해석하여 콘텐츠 제작에 활용이 용이합니다.",
-        "content_score": random.choice(scores),
-        "ai_reason": random.choice(reasons),
-        "youtube_title": f"비뇨의학과 의사가 솔직하게 털어놓는 {title}의 비밀",
-        "thumbnail_text": f"{title}의 진실",
-        "internal_title": f"{title} 대중화 기획안"
-    }

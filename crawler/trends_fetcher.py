@@ -11,8 +11,8 @@ def fetch_trends(keywords_config):
     trends_data = {}
     
     if not TrendReq:
-        print("[Google Trends] pytrends 라이브러리가 필요합니다. 기본 더미값을 제공합니다.")
-        return generate_dummy_trends(keywords_config)
+        print("[Google Trends] pytrends 라이브러리가 필요합니다. 실시간 수집을 스킵합니다.")
+        return {}
         
     try:
         pytrends = TrendReq(hl='ko-KR', tz=540) # 한국 시간대 세팅
@@ -44,32 +44,19 @@ def fetch_trends(keywords_config):
                             "change": round(change, 1)
                         }
                     else:
-                        trends_data[word] = {"interest": 50, "change": 0.0}
+                        trends_data[word] = {"interest": 0, "change": 0.0}
                 else:
-                    trends_data[word] = {"interest": 30, "change": 0.0}
+                    trends_data[word] = {"interest": 0, "change": 0.0}
                     
                 # 구글 API 차단 방지를 위한 슬립
                 time.sleep(random.uniform(2, 5))
                 
             except Exception as e:
-                print(f"[Google Trends] '{word}' 수집 중 오류: {e}")
-                trends_data[word] = {"interest": 40, "change": random.choice([5.2, -3.1, 10.4, 0.0])}
+                print(f"[Google Trends] '{word}' 수집 중 오류 (API 차단 가능성): {e}")
+                trends_data[word] = {"interest": 0, "change": 0.0}
                 
     except Exception as e:
-        print(f"[Google Trends] 초기화 오류: {e}. 더미값을 생성합니다.")
-        return generate_dummy_trends(keywords_config)
+        print(f"[Google Trends] 초기화 오류: {e}. 트렌드 수집을 중단합니다.")
+        return {}
         
     return trends_data
-
-def generate_dummy_trends(keywords_config):
-    """트렌드 수집 실패 시 사용할 백업 더미 데이터 생성"""
-    dummy = {}
-    for kw in keywords_config:
-        if kw.get("active", True):
-            word = kw.get("korean")
-            # 현실적인 난수 생성
-            dummy[word] = {
-                "interest": random.randint(30, 95),
-                "change": round(random.uniform(-10.0, 45.0), 1)
-            }
-    return dummy

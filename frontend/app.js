@@ -58,7 +58,7 @@ const elements = {
 
   categoryNav: document.getElementById('categoryNav'),
 
-  sourceNav: document.getElementById('sourceNav'),
+
 
   searchInput: document.getElementById('searchInput'),
 
@@ -356,7 +356,7 @@ function setupEventListeners() {
 
     appState.activeSource = null; // 카테고리 클릭 시 소스 필터 초기화
 
-    document.querySelectorAll('#sourceNav .nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelectorAll('.source-nav .nav-item').forEach(item => item.classList.remove('active'));
 
     
 
@@ -371,35 +371,19 @@ function setupEventListeners() {
   
 
   // Source Filter Navigation
-
-  elements.sourceNav.addEventListener('click', (e) => {
-
-    const navItem = e.target.closest('.nav-item');
-
-    if (!navItem) return;
-
-    
-
-    document.querySelectorAll('#sourceNav .nav-item').forEach(item => item.classList.remove('active'));
-
-    navItem.classList.add('active');
-
-    
-
-    appState.activeSource = navItem.dataset.source;
-
-    appState.activeCategory = 'all'; // 소스 클릭 시 카테고리 필터 초기화
-
-    document.querySelectorAll('#categoryNav .nav-item').forEach(item => item.classList.remove('active'));
-
-    
-
-    appState.currentPage = 1;
-
-    processAndRender();
-
-    closeMobileSidebar();
-
+  document.querySelectorAll('.source-nav').forEach(nav => {
+    nav.addEventListener('click', (e) => {
+      const navItem = e.target.closest('.nav-item');
+      if (!navItem) return;
+      document.querySelectorAll('.source-nav .nav-item').forEach(item => item.classList.remove('active'));
+      navItem.classList.add('active');
+      appState.activeSource = navItem.dataset.source;
+      appState.activeCategory = 'all';
+      document.querySelectorAll('#categoryNav .nav-item').forEach(item => item.classList.remove('active'));
+      appState.currentPage = 1;
+      processAndRender();
+      closeMobileSidebar();
+    });
   });
 
   
@@ -1097,33 +1081,24 @@ window.toggleBookmark = function(itemId) {
 // ─── Helpers ───
 
 function getSrcCode(source) {
-
   const map = {
-
     "BBC Health": "bbc",
-
     "PubMed": "pub",
-
     "네이버 뉴스": "nav",
-
     "arXiv": "arx",
-
     "Reddit Urology": "red",
-
     "Reddit Sex": "red",
-
     "Reddit Sexual Health": "red",
-
     "Reddit Tinder": "red",
-
     "Reddit STD": "red",
-
+    "Reddit Sex Education": "red",
+    "CNN Health": "bbc",
+    "NYT Health": "yon",
+    "헬스조선": "pub",
+    "Yahoo Japan Life": "yon",
     "연합뉴스 헬스": "yon"
-
   };
-
   return map[source] || "nav";
-
 }
 
 
